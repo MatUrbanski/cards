@@ -15,6 +15,8 @@ defmodule Cards do
        "Three of Hearts", "Four of Hearts", "Five of Hearts", "Ace of Diamonds",
        "Two of Diamonds", "Three of Diamonds", "Four of Diamonds", "Five of Diamonds"]
   """
+
+  @spec create_deck :: list
   def create_deck do
     values = ["Ace", "Two", "Three", "Four", "Five"]
     suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
@@ -30,6 +32,8 @@ defmodule Cards do
   ## Examples
       iex > Cards.shuffle(["Ace of Spades", "Two of Spades"])
   """
+
+  @spec shuffle(list) :: list
   def shuffle(deck) do
     Enum.shuffle(deck)
   end
@@ -44,6 +48,8 @@ defmodule Cards do
       true
 
   """
+
+  @spec contains?(list, any) :: boolean
   def contains?(deck, hand) do
     Enum.member?(deck, hand)
   end
@@ -61,6 +67,8 @@ defmodule Cards do
       ["Ace of Spades"]
 
   """
+
+  @spec deal(list, integer) :: list
   def deal(deck, hand_size) do
     Enum.split(deck, hand_size)
   end
@@ -74,6 +82,8 @@ defmodule Cards do
       :ok
 
   """
+
+  @spec save(list, String.t) :: atom
   def save(deck, filename) do
     binary = :erlang.term_to_binary(deck)
     File.write(filename, binary)
@@ -89,6 +99,8 @@ defmodule Cards do
       ["Ace of Spades"]
 
   """
+
+  @spec load(String.t) :: list
   def load(filename) do
     case File.read(filename) do
       {:ok, binary}    -> :erlang.binary_to_term(binary)
@@ -108,6 +120,8 @@ defmodule Cards do
       18
 
   """
+
+  @spec create_hand(integer) :: list
   def create_hand(hand_size) do
     Cards.create_deck
     |> Cards.shuffle
